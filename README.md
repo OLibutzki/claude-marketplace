@@ -17,6 +17,6 @@ A personal Claude Code plugin marketplace.
 ## Plugins
 
 - **devcontainer-claude** — a skill that wires the Claude Code CLI into dev containers
-  using the [`ghcr.io/OLibutzki/devcontainer-features/claude-code`](https://github.com/OLibutzki/devcontainers-claude-feature)
+  using the [`ghcr.io/OLibutzki/devcontainers-claude-feature/claude-code`](https://github.com/OLibutzki/devcontainers-claude-feature)
   feature. Triggers automatically when someone wants to set up a devcontainer with
   Claude Code available in it.
