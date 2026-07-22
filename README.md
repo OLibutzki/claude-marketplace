@@ -4,13 +4,9 @@ A personal Claude Code plugin marketplace.
 
 ## Adding this marketplace
 
-Local path:
-
 ```
-/plugin marketplace add C:\Entwicklung\claude\claude-plugin-marketplace
+/plugin marketplace add OLibutzki/claude-marketplace
 ```
-
-Once pushed to GitHub, it can instead be added as `owner/repo`.
 
 ## Installing a plugin
 
