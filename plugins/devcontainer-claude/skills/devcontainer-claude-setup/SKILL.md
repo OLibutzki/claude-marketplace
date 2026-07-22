@@ -95,6 +95,28 @@ For GitHub Codespaces, skip steps 1–2's host env var and instead store the tok
 named `CLAUDE_CODE_OAUTH_TOKEN` — Codespaces injects secrets as container environment
 variables automatically, and the same `containerEnv` passthrough picks it up.
 
+### Known issue: onboarding screen still appears on a fresh container
+
+Even with a valid `CLAUDE_CODE_OAUTH_TOKEN` set, `claude` shows the interactive
+theme-selection/login onboarding screen the first time it runs in a container —
+[anthropics/claude-code#73403](https://github.com/anthropics/claude-code/issues/73403).
+The onboarding gate checks `hasCompletedOnboarding` in `~/.claude.json` *before* it
+ever looks at env-based credentials, and that file is separate from the `~/.claude`
+directory mounted above, so it starts empty on every fresh container regardless of the
+persistence mounts.
+
+Work around it by pre-seeding the flag with an `onCreateCommand` (runs once per
+container build, before anyone opens a terminal):
+
+```json
+"onCreateCommand": "[ -n \"$CLAUDE_CODE_OAUTH_TOKEN\" ] && [ ! -f \"$HOME/.claude.json\" ] && echo '{\"hasCompletedOnboarding\": true}' > \"$HOME/.claude.json\" || true"
+```
+
+This only writes the file when it's missing, so it never clobbers an existing one, and
+it's a no-op without a token. It relies on undocumented behavior rather than a supported
+flag, so treat it as a stopgap — drop it once the upstream issue is fixed (a stale
+`hasCompletedOnboarding: true` file is harmless even after the fix ships).
+
 ## Root user caveat
 
 If `remoteUser` is `root`, Claude Code refuses to run with `--dangerously-skip-permissions`.
@@ -124,7 +146,8 @@ them by default. No extra configuration is needed.
     "mounts": [
         "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume",
         "source=claude-code-local-${devcontainerId},target=/home/vscode/.local,type=volume"
-    ]
+    ],
+    "onCreateCommand": "[ -n \"$CLAUDE_CODE_OAUTH_TOKEN\" ] && [ ! -f \"$HOME/.claude.json\" ] && echo '{\"hasCompletedOnboarding\": true}' > \"$HOME/.claude.json\" || true"
 }
 ```
 
