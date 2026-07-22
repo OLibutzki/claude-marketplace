@@ -1,0 +1,9 @@
+{
+  "name": "devcontainer-claude",
+  "version": "1.0.0",
+  "description": "Skill for wiring the Claude Code CLI into dev containers using the ghcr.io/OLibutzki/devcontainer-features/claude-code feature.",
+  "author": {
+    "name": "Oliver Libutzki",
+    "email": "oliver@libutzki.de"
+  }
+}

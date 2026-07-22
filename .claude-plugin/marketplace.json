@@ -1,0 +1,14 @@
+{
+  "name": "libutzki-marketplace",
+  "owner": {
+    "name": "Oliver Libutzki",
+    "email": "oliver@libutzki.de"
+  },
+  "plugins": [
+    {
+      "name": "devcontainer-claude",
+      "source": "./plugins/devcontainer-claude",
+      "description": "Skill for wiring the Claude Code CLI into dev containers using the ghcr.io/OLibutzki/devcontainer-features/claude-code feature."
+    }
+  ]
+}
