@@ -66,6 +66,10 @@ Pinning an exact `version` automatically sets `DISABLE_UPDATES` in Claude Code's
 blocking both background and manual (`claude update`) updates so the pin actually sticks.
 Switching back to `"latest"`/`"stable"` on a later rebuild re-enables updates.
 
+Only set an option when its value differs from the default in the table above — e.g.
+leave out `"version": "latest"` or `"autoOnboarding": true` since the feature already
+behaves that way with no config at all.
+
 ## The egress firewall
 
 The feature always installs a **default-deny outbound firewall for the whole container**,
@@ -163,7 +167,6 @@ images are not supported.
     "remoteUser": "vscode",
     "features": {
         "ghcr.io/olibutzki/devcontainer-feature-claude-code/claude-code:0": {
-            "version": "latest",
             "allowedDomains": "github.com,api.github.com,objects.githubusercontent.com,registry.npmjs.org"
         }
     },
