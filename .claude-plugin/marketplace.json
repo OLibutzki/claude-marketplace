@@ -8,7 +8,7 @@
     {
       "name": "devcontainer-claude",
       "source": "./plugins/devcontainer-claude",
-      "description": "Skill for wiring the Claude Code CLI into dev containers using the ghcr.io/OLibutzki/devcontainers-claude-feature/claude-code feature."
+      "description": "Skill for wiring the Claude Code CLI into dev containers using the ghcr.io/olibutzki/devcontainer-feature-claude-code/claude-code feature."
     }
   ]
 }
